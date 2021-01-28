@@ -42,5 +42,5 @@ const fetching=async (url)=>{
 //fetching()
 fetching('https://ingatlan.com/lista/elado+budapest+lakas')
 
-//811 pages-692.431 sec
-//2166 pages-1860.018
+//811 pages-692.431 sec=13 min
+//2166 pages-1860.018=31 min

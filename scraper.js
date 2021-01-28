@@ -1,22 +1,43 @@
 const {JSDOM} = require('jsdom');
 const fetch = require('node-fetch');
 
-const fetching=async ()=>{
-    const start=new Date()
-    const regex=new RegExp('[0-9]')
-    console.log(regex)
-    const http=await fetch('https://ingatlan.com/lista/kiado+v-ker+lakas?fbclid=IwAR0itofsHolv370TKF1--pWP6DUkRkCfrsS1_1lltHizDx4xiaCeFdYR0js')
+const getPages=async (url)=>{
+    const http=await fetch(url)
     const text=await http.text()
     const dom=new JSDOM(text)     
-    const addresses=dom.window.document.querySelectorAll('.listing__address')
-     for(let address of addresses){
-        const toCheck=address.textContent
-        regex.test(toCheck)? console.log(toCheck): console.log('not contains number')
-    } 
+    const pageNumber=dom.window.document.querySelector('.pagination__page-number').textContent
+    return (parseInt(pageNumber.split(' ')[3]))
+}
+
+const fetching=async (url)=>{
+    const start=new Date()
+    const addressArray=[]
+    const regex=new RegExp('[0-9]')
+    //console.log(regex)
+    const pages=await getPages(url)
+    //console.log(pages)
+    for(let i=1;i<=pages;i++){
+        const http=await fetch(`${url}&page=${i}`)
+        const text=await http.text()
+        const dom=new JSDOM(text)     
+        const addresses=dom.window.document.querySelectorAll('.listing__address')
+        //console.log(addresses)
+        for(let address of addresses){
+            const toCheck=address.textContent
+            if(regex.test(toCheck)){
+                addressArray.push(toCheck)
+                }
+   
+            } 
+            console.log(i)
+        }
+    
+    console.log(addressArray)
     console.log((new Date().getTime()-start.getTime())/1000,'s runtime')      
 
 }
 
+//&page=2
 
-fetching()
-
+//fetching()
+fetching('https://ingatlan.com/lista/kiado+v-ker+lakas?fbclid=IwAR0itofsHolv370TKF1--pWP6DUkRkCfrsS1_1lltHizDx4xiaCeFdYR0js')

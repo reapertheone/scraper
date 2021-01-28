@@ -40,4 +40,7 @@ const fetching=async (url)=>{
 //&page=2
 
 //fetching()
-fetching('https://ingatlan.com/lista/kiado+v-ker+lakas?fbclid=IwAR0itofsHolv370TKF1--pWP6DUkRkCfrsS1_1lltHizDx4xiaCeFdYR0js')
+fetching('https://ingatlan.com/lista/elado+budapest+lakas')
+
+//811 pages-692.431 sec
+//2166 pages-1860.018

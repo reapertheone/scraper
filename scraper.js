@@ -9,11 +9,8 @@ const fetching=async ()=>{
     const text=await http.text()
     const dom=new JSDOM(text)     
     const addresses=dom.window.document.querySelectorAll('.listing__address')
-    
-   
-    
      for(let address of addresses){
-        const toCheck=address.textContent.split(',')[0]
+        const toCheck=address.textContent
         regex.test(toCheck)? console.log(toCheck): console.log('not contains number')
     } 
     console.log((new Date().getTime()-start.getTime())/1000,'s runtime')      

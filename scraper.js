@@ -1,5 +1,6 @@
 const {JSDOM} = require('jsdom');
 const fetch = require('node-fetch');
+const fs =require('fs')
 
 const getPages=async (url)=>{
     const http=await fetch(url)
@@ -32,7 +33,7 @@ const fetching=async (url)=>{
             console.log(i)
         }
     
-    console.log(addressArray)
+    return addressArray
     console.log((new Date().getTime()-start.getTime())/1000,'s runtime')      
 
 }
@@ -40,7 +41,13 @@ const fetching=async (url)=>{
 //&page=2
 
 //fetching()
-fetching('https://ingatlan.com/lista/elado+budapest+lakas')
+const fetchAndSave = async ()=>{
+    let res=await fetching('https://ingatlan.com/lista/kiado+v-ker+lakas')
+    fs.writeFile('./asd.txt',res)
+
+}
+
+fetchAndSave()
 
 //811 pages-692.431 sec=13 min
 //2166 pages-1860.018=31 min

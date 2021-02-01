@@ -38,20 +38,21 @@ const fetching=async (url)=>{
 }
 
 //save addresses to json
-const fetchAndSave = async (url)=>{
+const fetchAndSave = async (url,filename)=>{
     let res=await fetching(url)
     let data=JSON.stringify(res)
-    fs.writeFile('./asd.json',data.split('\",').join('\",\n'),(err)=>{
+    
+    fs.writeFile(`./${filename}.json`,data.split('\",').join('\",\n'),(err)=>{
         if(err) throw err;
-        console.log('done')
+        console.log(`root/${filename}.json is ready`)
     })
     
 
 }
 
 
-//change this url to fetch different page
-fetchAndSave('https://ingatlan.com/lista/kiado+v-ker+lakas') 
+//first param is ingatlan.com url to scrape and second arg is the filename
+fetchAndSave('https://ingatlan.com/lista/kiado+v-ker+lakas','sample') 
 
 //811 pages-692.431 sec=13 min
 //2166 pages-1860.018=31 min

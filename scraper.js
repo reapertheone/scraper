@@ -25,7 +25,7 @@ const fetching=async (url)=>{
             const toCheck=address.textContent
             if(regex.test(toCheck)&&!addressArray.includes(toCheck)){
                
-                addressArray.push(toCheck)
+                addressArray.push(`Budapest,${toCheck}`)
                 }
    
             } 

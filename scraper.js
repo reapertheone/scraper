@@ -23,7 +23,7 @@ const fetching=async (url)=>{
         const addresses=dom.window.document.querySelectorAll('.listing__address')
         for(let address of addresses){
             const toCheck=address.textContent
-            if(regex.test(toCheck)&&!addressArray.includes(toCheck)){
+            if(regex.test(toCheck)&&!addressArray.includes(`Budapest,${toCheck}`)){
                
                 addressArray.push(`Budapest,${toCheck}`)
                 }

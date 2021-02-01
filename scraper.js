@@ -50,7 +50,7 @@ const fetchAndSave = async ()=>{
 
 }
 
-fetchAndSave()
+fetchAndSave() 
 
 //811 pages-692.431 sec=13 min
 //2166 pages-1860.018=31 min

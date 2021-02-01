@@ -18,7 +18,7 @@ const fetching=async (url)=>{
     const pages=await getPages(url)
     //console.log(pages)
     for(let i=1;i<=pages;i++){
-        const http=await fetch(`${url}&page=${i}`)
+        const http=await fetch(`${url}?page=${i}`)
         const text=await http.text()
         const dom=new JSDOM(text)     
         const addresses=dom.window.document.querySelectorAll('.listing__address')
@@ -42,8 +42,11 @@ const fetching=async (url)=>{
 
 //fetching()
 const fetchAndSave = async ()=>{
-    let res=await fetching('https://ingatlan.com/lista/kiado+v-ker+lakas')
-    fs.writeFile('./asd.txt',res)
+    let res=await fetching('https://ingatlan.com/szukites/kiado+lakas+vi-ker')
+    let file=fs.createWriteStream('./asdhatodik.txt')
+    res.forEach((address)=>{
+        file.write(`${address},\n`)
+    })
 
 }
 
